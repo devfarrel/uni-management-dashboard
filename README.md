@@ -1,49 +1,60 @@
-# 🎓 University Management Dashboard <br>
-A full-stack University Management Dashboard built with modern web technologies.
-This project demonstrates a real-world admin dashboard architecture with a clean separation between backend APIs and frontend UI, including authentication-ready patterns, data tables, forms, and reusable layouts.
----
-## ✨ Features <br>
-📊 Admin dashboard layout (Sidebar + Header) <br>
-👤 User management (list, create, delete) <br>
-⚡ Fast data fetching with React Query <br>
-🧩 Reusable components & layouts <br>
-🎨 Modern UI with Shadcn UI + Tailwind CSS <br>
-🔒 Backend powered by Express + Prisma + PostgreSQL <br>
-🧪 Seedable database for testing <br>
-🧠 Type-safe frontend & backend <br>
----
-## 🧱 Tech Stack <br>
-Frontend <br>
-*React (Vite) <br>
-*TypeScript <br>
-*React Router DOM <br>
-*@tanstack/react-query <br>
-*Shadcn UI <br>
-*Tailwind CSS <br>
-*React Hook Form <br>
-*Zod <br>
+# 🎓 University Management Dashboard
 
-Backend <br>
-*Node.js <br>
-*Express <br>
-*TypeScript <br>
-*Prisma ORM <br>
-*PostgreSQL <br>
+A full-stack **University Management Dashboard** built with modern web technologies.
+
+This project demonstrates a real-world admin dashboard architecture with a clean separation between **backend APIs** and **frontend UI**, including authentication-ready patterns, data tables, forms, and reusable layouts.
+
 ---
- 📂 Project Structure <br>
-`
-project-1/ <br>
-├── backend/ <br>
-│   ├── prisma/ <br>
-│   │   ├── schema.prisma <br>
-│   │   └── seed.ts <br>
-│   ├── src/ <br>
-│   │   ├── app.ts <br>
-│   │   ├── server.ts <br>
-│   │   ├── routes/ <br>
-│   │   ├── controllers/ <br>
-│   │   └── prisma.ts <br>
-│   └── .env <br>
+
+## ✨ Features
+
+- 📊 Admin dashboard layout (Sidebar + Header)
+- 👤 User management (list, create, delete)
+- ⚡ Fast data fetching with React Query
+- 🧩 Reusable components & layouts
+- 🎨 Modern UI with Shadcn UI + Tailwind CSS
+- 🔒 Backend powered by Express + Prisma + PostgreSQL
+- 🧪 Seedable database for testing
+- 🧠 Type-safe frontend & backend
+
+---
+
+## 🧱 Tech Stack
+
+### Frontend
+- React (Vite)
+- TypeScript
+- React Router DOM
+- @tanstack/react-query
+- Shadcn UI
+- Tailwind CSS
+- React Hook Form
+- Zod
+
+### Backend
+- Node.js
+- Express
+- TypeScript
+- Prisma ORM
+- PostgreSQL
+
+---
+
+## 📂 Project Structure
+
+```txt
+project-1/
+├── backend/
+│   ├── prisma/
+│   │   ├── schema.prisma
+│   │   └── seed.ts
+│   ├── src/
+│   │   ├── app.ts
+│   │   ├── server.ts
+│   │   ├── routes/
+│   │   ├── controllers/
+│   │   └── prisma.ts
+│   └── .env
 │
 ├── frontend/
 │   ├── src/
@@ -54,7 +65,6 @@ project-1/ <br>
 │   │   ├── routes/
 │   │   └── lib/
 │   └── main.tsx
-`
 ---
 ## 🚀 Getting Started
 Clone the repository
