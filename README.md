@@ -65,79 +65,86 @@ project-1/
 │   │   ├── routes/
 │   │   └── lib/
 │   └── main.tsx
+```
 ---
+
 ## 🚀 Getting Started
+
 Clone the repository
-`
+```
 git clone https://github.com/your-username/uni-management-dashboard.git
 cd uni-management-dashboard
-`
+```
 ### Backend Setup
-`
+
+```
 cd backend
 npm install
-`
+```
 Create .env:
-`
+```
 DATABASE_URL="postgresql://user:password@localhost:5432/your_db"
 PORT=4000
-`
+```
 Generate Prisma client:
-`
+```
 npx prisma generate
-`
+```
 Run migrations:
-`
-Run migrations:
-`
+```
+npx prisma migrate
+```
 Start backend:
-`
+```
 npm run dev
-`
+```
+
 ---
+
 ### Frontend Setup
-`
+```
 cd frontend
 npm install
 npm run dev
-`
+```
 Frontend will run on:
-`
+```
 http://localhost:5173
-`
+```
+
 ---
+
 ## 🧠 Architecture Notes
 
 ### Backend routes ≠ frontend routes
-*Backend routes handle data
-*Frontend routes handle UI & navigation
+- Backend routes handle data
+- Frontend routes handle UI & navigation
 ### React Query handles:
-*Data fetching
-*Caching
-*Loading & error states
-*Cache invalidation after mutations
+- Data fetching
+- Caching
+- Loading & error states
+- Cache invalidation after mutations
 ### Zod + React Hook Form
-*Schema-based validation
-*Strong type inference
-*Reusable form logic
+- Schema-based validation
+- Strong type inference
+- Reusable form logic
 ### Shadcn UI
-*Headless components
-*Full styling control with Tailwind
-*Production-ready patterns
+- Headless components
+- Full styling control with Tailwind
+- Production-ready patterns
+
 ---
-## 🧪 Useful Commands
-Open Prisma Studio:
-`
-npx prisma studio --url="postgresql://user:password@localhost:5432/your_db"
-`
----
+
 ## 📌 Future Improvements
-*Authentication & role-based access
-*Pagination & search
-*Edit user flow
-*Audit logs
-*Course & enrollment management
-*Dark mode support
+
+- Authentication & role-based access
+- Pagination & search
+- Edit user flow
+- Audit logs
+- Course & enrollment management
+- Dark mode support
+
 ---
+
 ## 📄 License
 MIT License
