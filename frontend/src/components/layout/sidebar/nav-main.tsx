@@ -1,63 +1,51 @@
-"use client"
-
-import { IconCirclePlusFilled, IconMail, type Icon } from "@tabler/icons-react"
-
-import { Button } from "@/components/ui/button"
 import {
   SidebarGroup,
   SidebarGroupContent,
+  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { NavLink } from "react-router-dom"
-import { cn } from "@/lib/utils"
-import type { NavItem } from "@/types/nav"
+} from "@/components/ui/sidebar";
+import { NavLink } from "react-router-dom";
+import type { NavGroup } from "@/types/nav";
+import { SearchForm } from "./search-form";
 
-export function NavMain({ items }: { items: NavItem[] }) {
+export function NavMain({ groups }: { groups: NavGroup[] }) {
   return (
-    <SidebarGroup>
-      <SidebarGroupContent className="flex flex-col gap-2">
-        <SidebarMenu>
-          <SidebarMenuItem className="flex items-center gap-2">
-            <SidebarMenuButton
-              tooltip="Quick Create"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
-            >
-              <IconCirclePlusFilled />
-              <span>Quick Create</span>
-            </SidebarMenuButton>
-            <Button
-              size="icon"
-              className="size-8 group-data-[collapsible=icon]:opacity-0"
-              variant="outline"
-            >
-              <IconMail />
-              <span className="sr-only">Inbox</span>
-            </Button>
-          </SidebarMenuItem>
-        </SidebarMenu>
-        <SidebarMenu>
-          {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
-            <SidebarMenuButton asChild tooltip={item.title}>
-              <NavLink
-                to={item.to}
-                className={({ isActive }) =>
-                  cn(
-                    "flex items-center gap-2",
-                    isActive && "bg-muted text-foreground"
-                  )
-                }
-              >
-                {item.icon && <item.icon className="h-4 w-4" />}
-                <span>{item.title}</span>
-              </NavLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>          
-          ))}
-        </SidebarMenu>
-      </SidebarGroupContent>
-    </SidebarGroup>
-  )
+    <>
+      <SidebarGroup>
+        <SidebarGroupContent>
+          <SearchForm className="data-[state=open]:bg-transparent pt-2" />
+        </SidebarGroupContent>
+      </SidebarGroup>
+
+      {groups.map((group) => (
+        <SidebarGroup key={group.title}>
+          <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {group.items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <NavLink to={item.to} end>
+                    {({ isActive }) => (
+                      <SidebarMenuButton
+                        asChild
+                        tooltip={item.title}
+                        data-active={isActive}
+                      >
+                        <span className="flex items-center gap-2">
+                          {item.icon && <item.icon className="h-4 w-4" />}
+                          <span>{item.title}</span>
+                        </span>
+                      </SidebarMenuButton>
+                    )}
+                  </NavLink>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      ))}
+    </>
+  );
 }

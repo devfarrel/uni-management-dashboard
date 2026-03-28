@@ -1,7 +1,12 @@
-import type { LucideIcon } from "lucide-react"
+import type { LucideIcon } from "lucide-react";
 
-export type NavItem = {
-  title: string
-  to: string
-  icon?: LucideIcon
+export interface NavItem {
+  title: string;
+  to: string;
+  icon?: LucideIcon;
+}
+
+export interface NavGroup {
+  title: string;
+  items: NavItem[];
 }
