@@ -1,99 +1,179 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, Controller } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 
-import { CreateUserSchema } from "@/api/user.api";
-import type { CreateUserInput } from "@/api/user.api";
+import { UserFormSchema, type UserFormValues } from "@/schemas/user.form.schema"
+import type { CreateUserInput } from "@/api/user.api"
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
+  Field,
+  FieldLabel,
+  FieldError,
+  FieldDescription,
+  FieldGroup,
+  FieldContent,
+} from "@/components/ui/field"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 type Props = {
-    mode: "create" | "edit";
-    initialValues?: Partial<CreateUserInput>;
-    onSubmit: (data: CreateUserInput) => Promise<void>;
-};
+  mode: "create" | "edit"
+  initialValues?: Partial<CreateUserInput>
+  onSubmit: (data: CreateUserInput) => Promise<void>
+}
 
-export function UserForm({mode, initialValues, onSubmit}: Props) {
-    const {
-        register,
-        handleSubmit,
-        setValue,
-        formState: { errors, isSubmitting },
-    } = useForm<CreateUserInput>({
-        resolver: zodResolver(CreateUserSchema),
-        defaultValues: {
-            role: "USER",
-            ...initialValues,
-        },
-    });
+export function UserForm({ mode, initialValues, onSubmit }: Props) {
+  const form = useForm<UserFormValues>({
+    resolver: zodResolver(UserFormSchema),
+    defaultValues: {
+        name: "",
+        email: "",
+        password: "",
+        role: "USER",
+        ...initialValues,
+    },
+  })
 
-    return (
-        <Card className="max-w-md">
-            <CardHeader>
-                <CardTitle>Create User</CardTitle>
-            </CardHeader>
+  return (
+    <div className="flex items-center justify-center">
+      <Card className="w-full sm:max-w-md">
+        <CardHeader>
+          <CardTitle>
+            {mode === "create" ? "Create User" : "Edit User"}
+          </CardTitle>
+          <CardDescription>
+            {mode === "create"
+              ? "Fill out the form to create a new user."
+              : "Update the user details below."}
+          </CardDescription>
+        </CardHeader>
 
-            <CardContent>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <div>
-                    <Label>Name</Label>
-                    <Input {...register("name")} />
-                    {errors.name && (
-                    <p className="text-sm text-destructive">{errors.name.message}</p>
+        <CardContent>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FieldGroup>
+
+              {/* Name */}
+              <Controller
+                name="name"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldContent>
+                    <FieldLabel>Name</FieldLabel>
+                    <Input
+                      {...field}
+                      aria-invalid={fieldState.invalid}
+                    />
+                    <FieldDescription>
+                      This is your public display name.
+                    </FieldDescription>
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
                     )}
-                </div>
+                    </FieldContent>
+                  </Field>
+                )}
+              />
 
-                <div>
-                    <Label>Email</Label>
-                    <Input type="email" {...register("email")} />
-                    {errors.email && (
-                    <p className="text-sm text-destructive">{errors.email.message}</p>
+              {/* Email */}
+              <Controller
+                name="email"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldContent>
+                    <FieldLabel>Email</FieldLabel>
+                    <Input
+                      {...field}
+                      type="email"
+                      aria-invalid={fieldState.invalid}
+                    />
+                    <FieldDescription>
+                      Enter a valid email address.
+                    </FieldDescription>
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
                     )}
-                </div>
+                    </FieldContent>
+                  </Field>
+                )}
+              />
 
-                <div>
-                    <Label>Password</Label>
-                    <Input type="password" {...register("password")} />
-                    {errors.password && (
-                    <p className="text-sm text-destructive">
-                        {errors.password.message}
-                    </p>
+              {/* Password */}
+              <Controller
+                name="password"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldContent>
+                    <FieldLabel>Password</FieldLabel>
+                    <Input
+                      {...field}
+                      type="password"
+                      aria-invalid={fieldState.invalid}
+                    />
+                    <FieldDescription>
+                      Must be at least 8 characters.
+                    </FieldDescription>
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
                     )}
-                </div>
+                    </FieldContent>
+                  </Field>
+                )}
+              />
 
-                <div>
-                    <Label>Role</Label>
+              {/* Role */}
+              <Controller
+                name="role"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel>Role</FieldLabel>
                     <Select
-                    defaultValue="USER"
-                    onValueChange={(v) => setValue("role", v as any)}
+                      value={field.value}
+                      onValueChange={field.onChange}
                     >
-                    <SelectTrigger>
+                      <SelectTrigger aria-invalid={fieldState.invalid}>
                         <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
+                      </SelectTrigger>
+                      <SelectContent>
                         <SelectItem value="USER">User</SelectItem>
                         <SelectItem value="ADMIN">Admin</SelectItem>
-                    </SelectContent>
+                      </SelectContent>
                     </Select>
-                    {errors.role && (
-                    <p className="text-sm text-destructive">{errors.role.message}</p>
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
                     )}
-                </div>
+                  </Field>
+                )}
+              />
 
-                <Button type="submit" disabled={isSubmitting}>
-                    {mode === "create" ? "Create User" : "Update User"}
-                </Button>
-                </form>
-            </CardContent>
-        </Card>
-    );
-};
+            </FieldGroup>
+
+            <Button
+              className="mt-9 w-full"
+              type="submit"
+              disabled={form.formState.isSubmitting}
+            >
+              {mode === "create" ? "Create User" : "Update User"}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}

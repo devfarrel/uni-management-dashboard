@@ -6,17 +6,28 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
+import { MoreHorizontalIcon } from "lucide-react"
 import { Button } from "@/components/ui/button";
 
 import { useNavigate } from "react-router-dom";
 import type { User } from "@/api/user.api";
 
 type Props = {
-    users: User[];
-};
+  users: User[]
+  onDelete: (id: number) => void
+  deleting: boolean
+}
 
-export function UsersTable({users}: Props) {
-
+export function UsersTable({users, onDelete, deleting}: Props) {
     const navigate = useNavigate();
 
     return (
@@ -37,6 +48,7 @@ export function UsersTable({users}: Props) {
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>Role</TableHead>
+              <TableHead className="text-center">Actions</TableHead>
             </TableRow>
           </TableHeader>
   
@@ -56,6 +68,28 @@ export function UsersTable({users}: Props) {
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.role}</TableCell>
+                  <TableCell className="text-center">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="outline" aria-label="Open menu" size="icon-sm">
+                          <MoreHorizontalIcon />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="w-40" align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <Separator className="my-1" />
+                        <DropdownMenuGroup>
+                          <DropdownMenuItem
+                            variant="destructive"
+                            disabled={deleting}
+                            onSelect={() => onDelete(user.id)}
+                          >
+                            Delete
+                          </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
                 </TableRow>
               ))
             )}

@@ -1,1 +1,31 @@
-{}
+{
+  "name": "project-1",
+  "version": "1.0.0",
+  "description": "A full-stack **University Management Dashboard** built with modern web technologies.",
+  "homepage": "https://github.com/devfarrel/uni-student-management#readme",
+  "bugs": {
+    "url": "https://github.com/devfarrel/uni-student-management/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devfarrel/uni-student-management.git"
+  },
+  "license": "ISC",
+  "author": "Farrel Maulana",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.2.0",
+    "@prisma/client": "^7.2.0",
+    "dotenv": "^17.2.3",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "@types/pg": "^8.16.0",
+    "prisma": "^7.2.0"
+  }
+}
