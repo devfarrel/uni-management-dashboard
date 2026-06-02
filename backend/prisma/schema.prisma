@@ -16,14 +16,108 @@ datasource db {
 enum Role {
   USER
   ADMIN
+  LECTURER
+  STUDENT
+}
+
+enum CourseType {
+  REQUIRED
+  ELECTIVE
 }
 
 model User {
   id        Int      @id @default(autoincrement())
-  name      String
+  identifier String  @unique
+  username  String   @unique
   email     String   @unique
   password  String
   role      Role     @default(USER)
+  avatar    String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  name      String?
+  address   String?
+  phone     String?
+  birthDate DateTime?
+  gender    String?
+
+  courses     Course[]   @relation("LecturerCourses")
+  classes     Class[]    @relation("LecturerClasses")
+  enrollments Enrollment[] @relation("StudentEnrollments")
+}
+
+model Department {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  code      String   @unique
+  faculty   String
+
+  courses Course[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Course {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  title     String
+  description String
+  credits   Int
+  semester  Int
+  academicYear String
+  type      CourseType
+
+  departmentId Int
+  department Department @relation(fields: [departmentId], references: [id])
+
+  lecturerId Int?
+  lecturer   User? @relation("LecturerCourses", fields: [lecturerId], references: [id])
+
+  prerequisites  Course[]   @relation("CoursePrerequisites")
+  requiredBy     Course[]   @relation("CoursePrerequisites")
+
+  classes     Class[]    @relation("CourseClasses")
+  maxStudents Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Class {
+  id        Int      @id @default(autoincrement())
+  name      String
+  room      String?
+  day       String
+  startTime String
+  endTime   String
+  academicYear String
+  semester  Int
+
+  courseId  Int
+  course    Course @relation("CourseClasses", fields: [courseId], references: [id])
+
+  lecturerId Int?
+  lecturer   User? @relation("LecturerClasses", fields: [lecturerId], references: [id])
+
+  enrollments Enrollment[]
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Enrollment {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  student   User     @relation("StudentEnrollments", fields: [studentId], references: [id])
+  classId   Int
+  class     Class    @relation(fields: [classId], references: [id])
+  grade     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, classId])
 }

@@ -11,7 +11,17 @@
 
 export const Role = {
   USER: 'USER',
-  ADMIN: 'ADMIN'
+  ADMIN: 'ADMIN',
+  LECTURER: 'LECTURER',
+  STUDENT: 'STUDENT'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const CourseType = {
+  REQUIRED: 'REQUIRED',
+  ELECTIVE: 'ELECTIVE'
+} as const
+
+export type CourseType = (typeof CourseType)[keyof typeof CourseType]

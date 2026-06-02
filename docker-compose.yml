@@ -9,15 +9,17 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/mydb
+      - DATABASE_URL=postgresql://postgres:farreltadashihamada99@db:5432/mydb
       - JWT_SECRET=super-secret-key
     depends_on:
       - db
   db:
     image: postgres:16
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: farreltadashihamada99
       POSTGRES_DB: mydb
 
   frontend:
@@ -29,3 +31,6 @@ services:
       - /app/node_modules
     depends_on:
       - backend
+
+# DATABASE_URL=postgresql://postgres:postgres@db:5432/mydb
+# POSTGRES_PASSWORD: postgres

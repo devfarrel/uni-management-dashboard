@@ -8,6 +8,8 @@ router.use(requireAuth);
 router.get("/", authorizeRoles("ADMIN"), UserController.getAll);
 router.get("/:id", UserController.getById);
 router.post("/", authorizeRoles("ADMIN"), UserController.create);
+router.patch("/:id/profile", requireAuth, UserController.updateMe);
+router.patch("/:id/security", requireAuth, UserController.updateSecurityMe);
 router.put("/:id", authorizeRoles("ADMIN"), UserController.update);
 router.delete("/:id", authorizeRoles("ADMIN"), UserController.delete);
 export default router;

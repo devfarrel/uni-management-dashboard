@@ -6,7 +6,7 @@ export const UserFormSchema = z.object({
   password: z
     .string()
     .min(8, "Password must be at least 8 characters"),
-  role: z.enum(["USER", "ADMIN"]),
+  role: z.enum(["USER", "ADMIN", "LECTURER", "STUDENT"]),
 })
 
 export type UserFormValues = z.infer<typeof UserFormSchema>
