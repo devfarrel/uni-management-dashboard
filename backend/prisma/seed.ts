@@ -11,7 +11,9 @@ async function main() {
       name: 'Admin',
       email: 'admin@gmail.com',
       password: passwordHash,
-      role: 'ADMIN'
+      role: 'ADMIN',
+      identifier: 'ADM-2026-000001',
+      username: 'admin'
     }
   })
 

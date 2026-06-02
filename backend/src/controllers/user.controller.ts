@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "@services/user.service.js";
+import { AuthRequest } from "@middlewares/auth.middleware";
 
 export const UserController = {
     getAll: async (req: Request, res: Response) => {
@@ -23,12 +24,31 @@ export const UserController = {
         res.status(201).json(newUser);
     },
 
-    update: async (req: Request, res: Response) => {
-        const id = Number(req.params.id);
-        const { name, email, password, role } = req.body;
+    update: async (req: AuthRequest, res: Response) => {
+        try {
+            const user = await UserService.update(Number(req.params.id), req.body);
+            res.json(user)
+        } catch (error: any) {
+            res.status(400).json({ message: error.message });
+        }
+    },
 
-        const updated = await UserService.update(id, { name, email, password, role});
-        res.json(updated);
+    updateMe: async (req: AuthRequest, res: Response) => {
+        try {
+            const user = await UserService.updateMe(Number(req.params.id), req.body)
+            res.json(user);
+        } catch (error: any) {
+            res.status(400).json({ message: error.message })
+        }
+    },
+
+    updateSecurityMe: async (req: AuthRequest, res: Response) => {
+        try {
+            const user = await UserService.updateSecurityMe(Number(req.params.id), req.body);
+            res.json(user)
+        } catch (error: any) {
+            res.status(400).json({ message: error.message });
+        }
     },
 
     delete: async (req: Request, res: Response) => {

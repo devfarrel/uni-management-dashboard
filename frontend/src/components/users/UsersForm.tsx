@@ -153,6 +153,8 @@ export function UserForm({ mode, initialValues, onSubmit }: Props) {
                       <SelectContent>
                         <SelectItem value="USER">User</SelectItem>
                         <SelectItem value="ADMIN">Admin</SelectItem>
+                        <SelectItem value="LECTURER">Lecturer</SelectItem>
+                        <SelectItem value="STUDENT">Student</SelectItem>
                       </SelectContent>
                     </Select>
                     {fieldState.invalid && (
