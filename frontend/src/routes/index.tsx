@@ -11,6 +11,11 @@ import DepartmentsPage from "@/pages/department/index";
 import CreateDepartmentPage from "@/pages/department/create";
 import CoursesPage from "@/pages/course/index";
 import CreateCoursePage from "@/pages/course/create";
+import UserSecurityEmailPage from "@/pages/users/security/UserSecurityEmailPage";
+import UserSecurityPasswordPage from "@/pages/users/security/UserSecurityPasswordPage";
+import UserSecurityUsernamePage from "@/pages/users/security/UserSecurityUsernamePage";
+import LecturersPage from "@/pages/lecturer/LecturersPage";
+import StudentsPage from "@/pages/lecturer/StudentsPage";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +33,14 @@ export const router = createBrowserRouter([
             element: <UsersPage />,
           },
           {
+            path: "/lecturers",
+            element: <LecturersPage />,
+          },
+          {
+            path: "/students",
+            element: <StudentsPage />,
+          },
+          {
             path: "/users/new",
             element: <AddUserPage />,
           },
@@ -38,6 +51,18 @@ export const router = createBrowserRouter([
           {
             path: "/users/:id/security",
             element: <UserSecurityPage />,
+          },
+          {
+            path: "/users/:id/security/username",
+            element: <UserSecurityUsernamePage />,
+          },
+          {
+            path: "/users/:id/security/email",
+            element: <UserSecurityEmailPage />,
+          },
+          {
+            path: "/users/:id/security/password",
+            element: <UserSecurityPasswordPage />,
           },
           {
             path: "/departments",

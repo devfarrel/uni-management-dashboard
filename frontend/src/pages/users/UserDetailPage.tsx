@@ -36,7 +36,7 @@ export default function UserDetailPage() {
   if (!user) return <div className="p-6">User not found</div>
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="px-6 space-y-6">
 
       {/* Back button */}
       <Button variant="ghost" onClick={() => navigate("/users")} className="gap-2">
@@ -46,7 +46,7 @@ export default function UserDetailPage() {
 
       {/* Profile Card */}
       <Card>
-        <CardContent className="pt-6">
+        <CardContent>
           <div className="flex items-center gap-4">
             {user.avatar ? (
               <img

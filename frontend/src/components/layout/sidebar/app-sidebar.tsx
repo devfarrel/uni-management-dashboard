@@ -21,17 +21,18 @@ const data = {
       icon: LayoutDashboard,
       items: [
         { title: "Dashboard", to: "/" },
-        { title: "Teachers", to: "/teachers" },
-        { title: "Students", to: "/students" },
+        { title: "Lecturer", to: "/lecturers" },
+        { title: "Student", to: "/students" },
       ],
     },
     {
       title: "Administration",
       icon: Users,
       items: [
-        { title: "Users", to: "/users" },
-        { title: "Courses", to: "/courses" },
-        { title: "Classes", to: "/classes" },
+        { title: "User", to: "/users" },
+        { title: "Department", to: "/departments"},
+        { title: "Class", to: "/classes" },
+        { title: "Course", to: "/courses" },
       ],
     },
   ],

@@ -9,6 +9,8 @@ export default function UsersPage() {
         deleting,
     } = useUsers();
 
+    const students = data?.filter((user) => user.role === "STUDENT") ?? [];
+
     const handleDeleteUser = async (id: number) => {
         await toast.promise(
             deleteUser(id),
@@ -23,11 +25,11 @@ export default function UsersPage() {
     return (
         <div className="p-6">
             <UsersTable
-                users={data ?? []}
+                users={students}
                 onDelete={handleDeleteUser}
                 deleting={deleting}
-                title="Users"
-                showCreate
+                title="Students"
+                showCreate={false}
             />
         </div>
     );
