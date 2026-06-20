@@ -27,6 +27,9 @@ type Props = {
   users: User[]
   onDelete: (id: number) => void
   deleting: boolean
+  title?: string
+  showCreate?: boolean
+  createPath?: string
 }
 
 const ROLE_BADGE: Record<Role, string> = {
@@ -36,18 +39,19 @@ const ROLE_BADGE: Record<Role, string> = {
     USER:     "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
 }
 
-export function UsersTable({users, onDelete, deleting}: Props) {
+export function UsersTable({users, onDelete, deleting, title, showCreate, createPath}: Props) {
     const navigate = useNavigate();
 
     return (
         <div className="space-y-4">
         {/* Header / Actions */}
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-semibold">Users</h1>
-  
-          <Button onClick={() => navigate("/users/new")}>
-            Create User
-          </Button>
+          <h1 className="text-xl font-semibold">{title}</h1>
+          {showCreate && (
+            <Button onClick={() => navigate(createPath || "/users/new")}>
+              Create User
+            </Button>
+          )}
         </div>
   
         {/* Table */}

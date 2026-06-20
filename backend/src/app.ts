@@ -5,6 +5,7 @@ import userRoutes from "@routes/user.routes.js"
 import authRoutes from "@routes/auth.routes.js";
 import departmentRoutes from "@routes/department.routes.js";
 import courseRoutes from "@routes/course.routes.js";
+import classRoutes from "@routes/class.routes.js";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/departments", departmentRoutes);
+app.use("/api/classes", classRoutes);
 app.use("/api/courses", courseRoutes);
 
 export default app;

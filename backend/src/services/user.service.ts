@@ -63,7 +63,7 @@ export const UserService = {
         })
     },
 
-    updateProfile: async (
+    updateMe: async (
         id: number,
         data: UpdateProfileUserInput
     ) => {
