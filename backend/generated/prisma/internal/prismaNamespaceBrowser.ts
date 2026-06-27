@@ -134,8 +134,13 @@ export const ClassScalarFieldEnum = {
   endTime: 'endTime',
   academicYear: 'academicYear',
   semester: 'semester',
+  maxStudents: 'maxStudents',
   courseId: 'courseId',
   lecturerId: 'lecturerId',
+  isOpen: 'isOpen',
+  enrollStart: 'enrollStart',
+  enrollEnd: 'enrollEnd',
+  isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -148,6 +153,7 @@ export const EnrollmentScalarFieldEnum = {
   studentId: 'studentId',
   classId: 'classId',
   grade: 'grade',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

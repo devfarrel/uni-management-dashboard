@@ -16,6 +16,8 @@ import UserSecurityPasswordPage from "@/pages/users/security/UserSecurityPasswor
 import UserSecurityUsernamePage from "@/pages/users/security/UserSecurityUsernamePage";
 import LecturersPage from "@/pages/lecturer/LecturersPage";
 import StudentsPage from "@/pages/lecturer/StudentsPage";
+import ClassesPage from "@/pages/class/index";
+import CreateClassPage from "@/pages/class/create";
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +81,14 @@ export const router = createBrowserRouter([
           {
             path: "/courses/new",
             element: <CreateCoursePage />,
+          },
+          {
+            path: "/classes",
+            element: <ClassesPage />,
+          },
+          {
+            path: "/classes/new",
+            element: <CreateClassPage />,
           },
         ],
       },

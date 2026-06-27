@@ -8,6 +8,7 @@ export type CreateClassInput = {
     semester:     number
     courseId:     number
     lecturerId?:  number
+    maxStudents?:  number
 }
 
 export type UpdateClassInput = Partial<CreateClassInput>
