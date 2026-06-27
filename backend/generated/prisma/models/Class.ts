@@ -29,6 +29,7 @@ export type AggregateClass = {
 export type ClassAvgAggregateOutputType = {
   id: number | null
   semester: number | null
+  maxStudents: number | null
   courseId: number | null
   lecturerId: number | null
 }
@@ -36,6 +37,7 @@ export type ClassAvgAggregateOutputType = {
 export type ClassSumAggregateOutputType = {
   id: number | null
   semester: number | null
+  maxStudents: number | null
   courseId: number | null
   lecturerId: number | null
 }
@@ -49,8 +51,13 @@ export type ClassMinAggregateOutputType = {
   endTime: string | null
   academicYear: string | null
   semester: number | null
+  maxStudents: number | null
   courseId: number | null
   lecturerId: number | null
+  isOpen: boolean | null
+  enrollStart: Date | null
+  enrollEnd: Date | null
+  isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -64,8 +71,13 @@ export type ClassMaxAggregateOutputType = {
   endTime: string | null
   academicYear: string | null
   semester: number | null
+  maxStudents: number | null
   courseId: number | null
   lecturerId: number | null
+  isOpen: boolean | null
+  enrollStart: Date | null
+  enrollEnd: Date | null
+  isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -79,8 +91,13 @@ export type ClassCountAggregateOutputType = {
   endTime: number
   academicYear: number
   semester: number
+  maxStudents: number
   courseId: number
   lecturerId: number
+  isOpen: number
+  enrollStart: number
+  enrollEnd: number
+  isActive: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -90,6 +107,7 @@ export type ClassCountAggregateOutputType = {
 export type ClassAvgAggregateInputType = {
   id?: true
   semester?: true
+  maxStudents?: true
   courseId?: true
   lecturerId?: true
 }
@@ -97,6 +115,7 @@ export type ClassAvgAggregateInputType = {
 export type ClassSumAggregateInputType = {
   id?: true
   semester?: true
+  maxStudents?: true
   courseId?: true
   lecturerId?: true
 }
@@ -110,8 +129,13 @@ export type ClassMinAggregateInputType = {
   endTime?: true
   academicYear?: true
   semester?: true
+  maxStudents?: true
   courseId?: true
   lecturerId?: true
+  isOpen?: true
+  enrollStart?: true
+  enrollEnd?: true
+  isActive?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -125,8 +149,13 @@ export type ClassMaxAggregateInputType = {
   endTime?: true
   academicYear?: true
   semester?: true
+  maxStudents?: true
   courseId?: true
   lecturerId?: true
+  isOpen?: true
+  enrollStart?: true
+  enrollEnd?: true
+  isActive?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -140,8 +169,13 @@ export type ClassCountAggregateInputType = {
   endTime?: true
   academicYear?: true
   semester?: true
+  maxStudents?: true
   courseId?: true
   lecturerId?: true
+  isOpen?: true
+  enrollStart?: true
+  enrollEnd?: true
+  isActive?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -242,8 +276,13 @@ export type ClassGroupByOutputType = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
   courseId: number
   lecturerId: number | null
+  isOpen: boolean
+  enrollStart: Date | null
+  enrollEnd: Date | null
+  isActive: boolean
   createdAt: Date
   updatedAt: Date
   _count: ClassCountAggregateOutputType | null
@@ -280,8 +319,13 @@ export type ClassWhereInput = {
   endTime?: Prisma.StringFilter<"Class"> | string
   academicYear?: Prisma.StringFilter<"Class"> | string
   semester?: Prisma.IntFilter<"Class"> | number
+  maxStudents?: Prisma.IntFilter<"Class"> | number
   courseId?: Prisma.IntFilter<"Class"> | number
   lecturerId?: Prisma.IntNullableFilter<"Class"> | number | null
+  isOpen?: Prisma.BoolFilter<"Class"> | boolean
+  enrollStart?: Prisma.DateTimeNullableFilter<"Class"> | Date | string | null
+  enrollEnd?: Prisma.DateTimeNullableFilter<"Class"> | Date | string | null
+  isActive?: Prisma.BoolFilter<"Class"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Class"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Class"> | Date | string
   course?: Prisma.XOR<Prisma.CourseScalarRelationFilter, Prisma.CourseWhereInput>
@@ -298,8 +342,13 @@ export type ClassOrderByWithRelationInput = {
   endTime?: Prisma.SortOrder
   academicYear?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  maxStudents?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   lecturerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isOpen?: Prisma.SortOrder
+  enrollStart?: Prisma.SortOrderInput | Prisma.SortOrder
+  enrollEnd?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   course?: Prisma.CourseOrderByWithRelationInput
@@ -319,8 +368,13 @@ export type ClassWhereUniqueInput = Prisma.AtLeast<{
   endTime?: Prisma.StringFilter<"Class"> | string
   academicYear?: Prisma.StringFilter<"Class"> | string
   semester?: Prisma.IntFilter<"Class"> | number
+  maxStudents?: Prisma.IntFilter<"Class"> | number
   courseId?: Prisma.IntFilter<"Class"> | number
   lecturerId?: Prisma.IntNullableFilter<"Class"> | number | null
+  isOpen?: Prisma.BoolFilter<"Class"> | boolean
+  enrollStart?: Prisma.DateTimeNullableFilter<"Class"> | Date | string | null
+  enrollEnd?: Prisma.DateTimeNullableFilter<"Class"> | Date | string | null
+  isActive?: Prisma.BoolFilter<"Class"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Class"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Class"> | Date | string
   course?: Prisma.XOR<Prisma.CourseScalarRelationFilter, Prisma.CourseWhereInput>
@@ -337,8 +391,13 @@ export type ClassOrderByWithAggregationInput = {
   endTime?: Prisma.SortOrder
   academicYear?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  maxStudents?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   lecturerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isOpen?: Prisma.SortOrder
+  enrollStart?: Prisma.SortOrderInput | Prisma.SortOrder
+  enrollEnd?: Prisma.SortOrderInput | Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ClassCountOrderByAggregateInput
@@ -360,8 +419,13 @@ export type ClassScalarWhereWithAggregatesInput = {
   endTime?: Prisma.StringWithAggregatesFilter<"Class"> | string
   academicYear?: Prisma.StringWithAggregatesFilter<"Class"> | string
   semester?: Prisma.IntWithAggregatesFilter<"Class"> | number
+  maxStudents?: Prisma.IntWithAggregatesFilter<"Class"> | number
   courseId?: Prisma.IntWithAggregatesFilter<"Class"> | number
   lecturerId?: Prisma.IntNullableWithAggregatesFilter<"Class"> | number | null
+  isOpen?: Prisma.BoolWithAggregatesFilter<"Class"> | boolean
+  enrollStart?: Prisma.DateTimeNullableWithAggregatesFilter<"Class"> | Date | string | null
+  enrollEnd?: Prisma.DateTimeNullableWithAggregatesFilter<"Class"> | Date | string | null
+  isActive?: Prisma.BoolWithAggregatesFilter<"Class"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Class"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Class"> | Date | string
 }
@@ -374,6 +438,11 @@ export type ClassCreateInput = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
+  isOpen?: boolean
+  enrollStart?: Date | string | null
+  enrollEnd?: Date | string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   course: Prisma.CourseCreateNestedOneWithoutClassesInput
@@ -390,8 +459,13 @@ export type ClassUncheckedCreateInput = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
   courseId: number
   lecturerId?: number | null
+  isOpen?: boolean
+  enrollStart?: Date | string | null
+  enrollEnd?: Date | string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutClassInput
@@ -405,6 +479,11 @@ export type ClassUpdateInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   course?: Prisma.CourseUpdateOneRequiredWithoutClassesNestedInput
@@ -421,8 +500,13 @@ export type ClassUncheckedUpdateInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
   courseId?: Prisma.IntFieldUpdateOperationsInput | number
   lecturerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutClassNestedInput
@@ -437,8 +521,13 @@ export type ClassCreateManyInput = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
   courseId: number
   lecturerId?: number | null
+  isOpen?: boolean
+  enrollStart?: Date | string | null
+  enrollEnd?: Date | string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -451,6 +540,11 @@ export type ClassUpdateManyMutationInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -464,8 +558,13 @@ export type ClassUncheckedUpdateManyInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
   courseId?: Prisma.IntFieldUpdateOperationsInput | number
   lecturerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -489,8 +588,13 @@ export type ClassCountOrderByAggregateInput = {
   endTime?: Prisma.SortOrder
   academicYear?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  maxStudents?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   lecturerId?: Prisma.SortOrder
+  isOpen?: Prisma.SortOrder
+  enrollStart?: Prisma.SortOrder
+  enrollEnd?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -498,6 +602,7 @@ export type ClassCountOrderByAggregateInput = {
 export type ClassAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  maxStudents?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   lecturerId?: Prisma.SortOrder
 }
@@ -511,8 +616,13 @@ export type ClassMaxOrderByAggregateInput = {
   endTime?: Prisma.SortOrder
   academicYear?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  maxStudents?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   lecturerId?: Prisma.SortOrder
+  isOpen?: Prisma.SortOrder
+  enrollStart?: Prisma.SortOrder
+  enrollEnd?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -526,8 +636,13 @@ export type ClassMinOrderByAggregateInput = {
   endTime?: Prisma.SortOrder
   academicYear?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  maxStudents?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   lecturerId?: Prisma.SortOrder
+  isOpen?: Prisma.SortOrder
+  enrollStart?: Prisma.SortOrder
+  enrollEnd?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -535,6 +650,7 @@ export type ClassMinOrderByAggregateInput = {
 export type ClassSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   semester?: Prisma.SortOrder
+  maxStudents?: Prisma.SortOrder
   courseId?: Prisma.SortOrder
   lecturerId?: Prisma.SortOrder
 }
@@ -628,6 +744,10 @@ export type ClassUncheckedUpdateManyWithoutCourseNestedInput = {
   deleteMany?: Prisma.ClassScalarWhereInput | Prisma.ClassScalarWhereInput[]
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type ClassCreateNestedOneWithoutEnrollmentsInput = {
   create?: Prisma.XOR<Prisma.ClassCreateWithoutEnrollmentsInput, Prisma.ClassUncheckedCreateWithoutEnrollmentsInput>
   connectOrCreate?: Prisma.ClassCreateOrConnectWithoutEnrollmentsInput
@@ -650,6 +770,11 @@ export type ClassCreateWithoutLecturerInput = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
+  isOpen?: boolean
+  enrollStart?: Date | string | null
+  enrollEnd?: Date | string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   course: Prisma.CourseCreateNestedOneWithoutClassesInput
@@ -665,7 +790,12 @@ export type ClassUncheckedCreateWithoutLecturerInput = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
   courseId: number
+  isOpen?: boolean
+  enrollStart?: Date | string | null
+  enrollEnd?: Date | string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutClassInput
@@ -709,8 +839,13 @@ export type ClassScalarWhereInput = {
   endTime?: Prisma.StringFilter<"Class"> | string
   academicYear?: Prisma.StringFilter<"Class"> | string
   semester?: Prisma.IntFilter<"Class"> | number
+  maxStudents?: Prisma.IntFilter<"Class"> | number
   courseId?: Prisma.IntFilter<"Class"> | number
   lecturerId?: Prisma.IntNullableFilter<"Class"> | number | null
+  isOpen?: Prisma.BoolFilter<"Class"> | boolean
+  enrollStart?: Prisma.DateTimeNullableFilter<"Class"> | Date | string | null
+  enrollEnd?: Prisma.DateTimeNullableFilter<"Class"> | Date | string | null
+  isActive?: Prisma.BoolFilter<"Class"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Class"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Class"> | Date | string
 }
@@ -723,6 +858,11 @@ export type ClassCreateWithoutCourseInput = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
+  isOpen?: boolean
+  enrollStart?: Date | string | null
+  enrollEnd?: Date | string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   lecturer?: Prisma.UserCreateNestedOneWithoutClassesInput
@@ -738,7 +878,12 @@ export type ClassUncheckedCreateWithoutCourseInput = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
   lecturerId?: number | null
+  isOpen?: boolean
+  enrollStart?: Date | string | null
+  enrollEnd?: Date | string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutClassInput
@@ -778,6 +923,11 @@ export type ClassCreateWithoutEnrollmentsInput = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
+  isOpen?: boolean
+  enrollStart?: Date | string | null
+  enrollEnd?: Date | string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   course: Prisma.CourseCreateNestedOneWithoutClassesInput
@@ -793,8 +943,13 @@ export type ClassUncheckedCreateWithoutEnrollmentsInput = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
   courseId: number
   lecturerId?: number | null
+  isOpen?: boolean
+  enrollStart?: Date | string | null
+  enrollEnd?: Date | string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -823,6 +978,11 @@ export type ClassUpdateWithoutEnrollmentsInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   course?: Prisma.CourseUpdateOneRequiredWithoutClassesNestedInput
@@ -838,8 +998,13 @@ export type ClassUncheckedUpdateWithoutEnrollmentsInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
   courseId?: Prisma.IntFieldUpdateOperationsInput | number
   lecturerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -853,7 +1018,12 @@ export type ClassCreateManyLecturerInput = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
   courseId: number
+  isOpen?: boolean
+  enrollStart?: Date | string | null
+  enrollEnd?: Date | string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -866,6 +1036,11 @@ export type ClassUpdateWithoutLecturerInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   course?: Prisma.CourseUpdateOneRequiredWithoutClassesNestedInput
@@ -881,7 +1056,12 @@ export type ClassUncheckedUpdateWithoutLecturerInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
   courseId?: Prisma.IntFieldUpdateOperationsInput | number
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutClassNestedInput
@@ -896,7 +1076,12 @@ export type ClassUncheckedUpdateManyWithoutLecturerInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
   courseId?: Prisma.IntFieldUpdateOperationsInput | number
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -910,7 +1095,12 @@ export type ClassCreateManyCourseInput = {
   endTime: string
   academicYear: string
   semester: number
+  maxStudents: number
   lecturerId?: number | null
+  isOpen?: boolean
+  enrollStart?: Date | string | null
+  enrollEnd?: Date | string | null
+  isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -923,6 +1113,11 @@ export type ClassUpdateWithoutCourseInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lecturer?: Prisma.UserUpdateOneWithoutClassesNestedInput
@@ -938,7 +1133,12 @@ export type ClassUncheckedUpdateWithoutCourseInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
   lecturerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutClassNestedInput
@@ -953,7 +1153,12 @@ export type ClassUncheckedUpdateManyWithoutCourseInput = {
   endTime?: Prisma.StringFieldUpdateOperationsInput | string
   academicYear?: Prisma.StringFieldUpdateOperationsInput | string
   semester?: Prisma.IntFieldUpdateOperationsInput | number
+  maxStudents?: Prisma.IntFieldUpdateOperationsInput | number
   lecturerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  isOpen?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  enrollStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  enrollEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -998,8 +1203,13 @@ export type ClassSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   endTime?: boolean
   academicYear?: boolean
   semester?: boolean
+  maxStudents?: boolean
   courseId?: boolean
   lecturerId?: boolean
+  isOpen?: boolean
+  enrollStart?: boolean
+  enrollEnd?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>
@@ -1017,8 +1227,13 @@ export type ClassSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   endTime?: boolean
   academicYear?: boolean
   semester?: boolean
+  maxStudents?: boolean
   courseId?: boolean
   lecturerId?: boolean
+  isOpen?: boolean
+  enrollStart?: boolean
+  enrollEnd?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>
@@ -1034,8 +1249,13 @@ export type ClassSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   endTime?: boolean
   academicYear?: boolean
   semester?: boolean
+  maxStudents?: boolean
   courseId?: boolean
   lecturerId?: boolean
+  isOpen?: boolean
+  enrollStart?: boolean
+  enrollEnd?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>
@@ -1051,13 +1271,18 @@ export type ClassSelectScalar = {
   endTime?: boolean
   academicYear?: boolean
   semester?: boolean
+  maxStudents?: boolean
   courseId?: boolean
   lecturerId?: boolean
+  isOpen?: boolean
+  enrollStart?: boolean
+  enrollEnd?: boolean
+  isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ClassOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "room" | "day" | "startTime" | "endTime" | "academicYear" | "semester" | "courseId" | "lecturerId" | "createdAt" | "updatedAt", ExtArgs["result"]["class"]>
+export type ClassOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "room" | "day" | "startTime" | "endTime" | "academicYear" | "semester" | "maxStudents" | "courseId" | "lecturerId" | "isOpen" | "enrollStart" | "enrollEnd" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["class"]>
 export type ClassInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>
   lecturer?: boolean | Prisma.Class$lecturerArgs<ExtArgs>
@@ -1089,8 +1314,13 @@ export type $ClassPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     endTime: string
     academicYear: string
     semester: number
+    maxStudents: number
     courseId: number
     lecturerId: number | null
+    isOpen: boolean
+    enrollStart: Date | null
+    enrollEnd: Date | null
+    isActive: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["class"]>
@@ -1527,8 +1757,13 @@ export interface ClassFieldRefs {
   readonly endTime: Prisma.FieldRef<"Class", 'String'>
   readonly academicYear: Prisma.FieldRef<"Class", 'String'>
   readonly semester: Prisma.FieldRef<"Class", 'Int'>
+  readonly maxStudents: Prisma.FieldRef<"Class", 'Int'>
   readonly courseId: Prisma.FieldRef<"Class", 'Int'>
   readonly lecturerId: Prisma.FieldRef<"Class", 'Int'>
+  readonly isOpen: Prisma.FieldRef<"Class", 'Boolean'>
+  readonly enrollStart: Prisma.FieldRef<"Class", 'DateTime'>
+  readonly enrollEnd: Prisma.FieldRef<"Class", 'DateTime'>
+  readonly isActive: Prisma.FieldRef<"Class", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Class", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Class", 'DateTime'>
 }
