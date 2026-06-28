@@ -17,6 +17,7 @@ export const ClassSchema = z.object({
     course:       CourseSchema.pick({ id: true, code: true, title: true }).optional(),
     lecturerId:   z.number().nullable(),
     lecturer:     UserSchema.pick({ id: true, name: true, email: true, identifier: true }).nullable(),
+    maxStudents:  z.number(),
     _count:       z.object({ enrollments: z.number() }).optional(),
     createdAt:    z.string(),
     updatedAt:    z.string(),

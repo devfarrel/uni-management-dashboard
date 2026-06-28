@@ -18,6 +18,7 @@ import LecturersPage from "@/pages/lecturer/LecturersPage";
 import StudentsPage from "@/pages/lecturer/StudentsPage";
 import ClassesPage from "@/pages/class/index";
 import CreateClassPage from "@/pages/class/create";
+import ClassRosterPage from "@/pages/class/rosterIndex";
 
 export const router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ export const router = createBrowserRouter([
             path: "/classes/new",
             element: <CreateClassPage />,
           },
+          {
+            path: "/classes/:id/roster",
+            element: <ClassRosterPage />,
+          }
         ],
       },
     ],

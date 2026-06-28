@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 import { MoreHorizontalIcon } from "lucide-react"
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { useNavigate } from "react-router-dom";
