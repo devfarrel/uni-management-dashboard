@@ -14,12 +14,23 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  PaginationEllipsis,
+} from "@/components/ui/pagination"
+
 import { Separator } from "@/components/ui/separator";
 import { MoreHorizontalIcon, UserIcon } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
 
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import type { User, Role } from "@/api/user.api";
 
@@ -32,6 +43,8 @@ type Props = {
   createPath?: string
 }
 
+const ITEMS_PER_PAGE = 6
+
 const ROLE_BADGE: Record<Role, string> = {
     ADMIN:    "bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300",
     LECTURER: "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300",
@@ -40,10 +53,15 @@ const ROLE_BADGE: Record<Role, string> = {
 }
 
 export function UsersTable({users, onDelete, deleting, title, showCreate, createPath}: Props) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1)
 
-    return (
-        <div className="space-y-4">
+  const totalPages = Math.ceil(users.length / ITEMS_PER_PAGE)
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
+  const paginatedUsers = users.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+
+  return (
+    <div className="space-y-4">
         {/* Header / Actions */}
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-semibold">{title}</h1>
@@ -76,7 +94,7 @@ export function UsersTable({users, onDelete, deleting, title, showCreate, create
                 </TableCell>
               </TableRow>
             ) : (
-              users.map((user) => (
+              paginatedUsers.map((user) => (
                 <TableRow key={user.id}>
                   <TableCell>
                     <div className="flex items-center space-x-3">
@@ -173,6 +191,58 @@ export function UsersTable({users, onDelete, deleting, title, showCreate, create
             )}
           </TableBody>
         </Table>
+        {totalPages > 1 && (
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+              />
+            </PaginationItem>
+
+            {Array.from({ length: totalPages }).map((_, i) => {
+              const page = i + 1
+              // show first, last, current, and neighbors — ellipsis the rest
+              const showPage =
+                page === 1 ||
+                page === totalPages ||
+                Math.abs(page - currentPage) <= 1
+
+              if (!showPage) {
+                // only show ellipsis once between gaps
+                if (page === 2 || page === totalPages - 1) {
+                  return (
+                    <PaginationItem key={page}>
+                      <PaginationEllipsis />
+                    </PaginationItem>
+                  )
+                }
+                return null
+              }
+
+              return (
+                <PaginationItem key={page}>
+                  <PaginationLink
+                    isActive={page === currentPage}
+                    onClick={() => setCurrentPage(page)}
+                    className="cursor-pointer"
+                  >
+                    {page}
+                  </PaginationLink>
+                </PaginationItem>
+              )
+            })}
+
+            <PaginationItem>
+              <PaginationNext
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
       </div>
-    );
+  )
 }

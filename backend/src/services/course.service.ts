@@ -30,7 +30,7 @@ export const CourseService = {
             where: { id },
             include: {
                 department: true,
-                lecturer: { select: {id: true, name: true, email: true } },
+                lecturer: { select: { id: true, name: true, email: true } },
             },
         })
     },

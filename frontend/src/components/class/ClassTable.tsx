@@ -34,10 +34,10 @@ export function ClassesTable({ classes, onDelete, deleting }: Props) {
         <div className="space-y-4">
         {/* Header / Actions */}
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-semibold">Courses</h1>
+          <h1 className="text-xl font-semibold">Class</h1>
   
           <Button onClick={() => navigate("/classes/new")}>
-            Create Course
+            Create Class
           </Button>
         </div>
   
@@ -49,9 +49,6 @@ export function ClassesTable({ classes, onDelete, deleting }: Props) {
               <TableHead>Name</TableHead>
               <TableHead>Room</TableHead>
               <TableHead>Day</TableHead>
-              <TableHead>Time</TableHead>
-              <TableHead>Academic Year</TableHead>
-              <TableHead>Semester</TableHead>
               <TableHead>Lecturer</TableHead>
               <TableHead className="text-center">Actions</TableHead>
             </TableRow>
