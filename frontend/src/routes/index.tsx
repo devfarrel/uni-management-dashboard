@@ -19,6 +19,8 @@ import StudentsPage from "@/pages/lecturer/StudentsPage";
 import ClassesPage from "@/pages/class/index";
 import CreateClassPage from "@/pages/class/create";
 import ClassRosterPage from "@/pages/class/rosterIndex";
+import EnrollmentsPage from "@/pages/enrollment/index";
+import CreateEnrollmentPage from "@/pages/enrollment/create";
 
 export const router = createBrowserRouter([
   {
@@ -94,6 +96,14 @@ export const router = createBrowserRouter([
           {
             path: "/classes/:id/roster",
             element: <ClassRosterPage />,
+          },
+          {
+            path: "/enrollments",
+            element: <EnrollmentsPage />,
+          },
+          {
+            path: "/enrollments/new",
+            element: <CreateEnrollmentPage />,
           }
         ],
       },
