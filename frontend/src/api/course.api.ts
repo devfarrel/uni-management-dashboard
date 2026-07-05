@@ -50,8 +50,6 @@ export type CourseInput = z.infer<typeof CourseInputSchema>
 export const CourseAPI = {
     getAll: async (): Promise<Course[]> => {
         const res = await api.get("/courses")
-        console.log("status:", res.status)
-        console.log("raw response:", JSON.stringify(res.data))
         try {
             return CourseArraySchema.parse(res.data)
         } catch (err) {

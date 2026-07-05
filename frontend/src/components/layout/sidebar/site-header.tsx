@@ -12,6 +12,7 @@ import { NavUserContainer } from "./nav-user-container";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { useLocation, Link } from "react-router-dom";
+import { useUsers } from "@/hooks/useUsers";
 
 export function SiteHeader() {
   const location = useLocation();
@@ -23,10 +24,21 @@ export function SiteHeader() {
 
   const isNested = parentNav && location.pathname !== parentNav.to;
 
-  // e.g. "/users/new" -> "New"  or  "/users/123/edit" -> "Edit"
+  // Extract the last path segment, e.g. "/users/123" -> "123"
+  const lastSegment = location.pathname.split("/").pop() ?? "";
+  const numericId = /^\d+$/.test(lastSegment) ? Number(lastSegment) : undefined;
+
+  // Fetch the entity name only when the segment is a numeric ID
+  const { userQuery } = useUsers(numericId);
+  const fetchedLabel = userQuery.data
+    ? (userQuery.data.name ?? userQuery.data.username)
+    : undefined;
+
+  // e.g. "/users/new" -> "New"  or  "/users/123" -> fetched name  or  "/users/123/edit" -> "Edit"
   const childLabel = isNested
-    ? location.pathname.split("/").pop()?.replace(/-/g, " ")
+    ? (fetchedLabel ?? lastSegment.replace(/-/g, " "))
     : null;
+
 
   return (
     <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">

@@ -19,9 +19,17 @@ import {
     PaginationLink, PaginationNext, PaginationPrevious,
     PaginationEllipsis,
 } from "@/components/ui/pagination"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import { ChevronDown } from "lucide-react"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -67,16 +75,47 @@ export function DataTable<TData, TValue>({
 
     return (
         <div className="space-y-4">
+            <div className="flex items-center py-4">
+                {/* Search */}
+                {searchKey && (
+                    <Input
+                        placeholder={searchPlaceholder}
+                        value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
+                        onChange={(e) => table.getColumn(searchKey)?.setFilterValue(e.target.value)}
+                        className="max-w-sm"
+                    />
+                )}
 
-            {/* Search */}
-            {searchKey && (
-                <Input
-                    placeholder={searchPlaceholder}
-                    value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
-                    onChange={(e) => table.getColumn(searchKey)?.setFilterValue(e.target.value)}
-                    className="max-w-sm"
-                />
-            )}
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline" className="ml-auto">
+                        Columns
+                        <ChevronDown className="ml-auto h-4 w-4" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        {table
+                        .getAllColumns()
+                        .filter(
+                            (column) => column.getCanHide()
+                        )
+                        .map((column) => {
+                            return (
+                            <DropdownMenuCheckboxItem
+                                key={column.id}
+                                className="capitalize"
+                                checked={column.getIsVisible()}
+                                onCheckedChange={(value) =>
+                                column.toggleVisibility(!!value)
+                                }
+                            >
+                                {column.id}
+                            </DropdownMenuCheckboxItem>
+                            )
+                        })}
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
 
             {/* Table */}
             <div>
@@ -130,9 +169,9 @@ export function DataTable<TData, TValue>({
 
             {/* Footer */}
             <div className="flex items-center justify-between">
-                <p className="text-sm text-muted-foreground">
-                    {table.getFilteredRowModel().rows.length} total rows(s)
-                </p>
+                <span className="text-sm text-muted-foreground">
+                    {table.getFilteredRowModel().rows.length} total row(s)
+                </span>
 
                 {totalPages > 1 && (
                     <Pagination>

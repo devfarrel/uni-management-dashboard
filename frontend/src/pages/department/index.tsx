@@ -21,7 +21,7 @@ export default function DepartmentsPage() {
     }
 
     return (
-        <div className="p-6">
+        <div className="px-4 lg:px-6">
             <DepartmentTable
                 departments={data || []}
                 onDelete={handleDeleteDepartment}

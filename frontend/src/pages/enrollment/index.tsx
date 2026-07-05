@@ -2,8 +2,6 @@
 import { useNavigate } from "react-router-dom"
 import { useEnrollments } from "@/hooks/useEnrollments"
 import { EnrollmentsTable } from "@/components/enrollment/EnrollmentsTable"
-import { Button } from "@/components/ui/button"
-import { Plus } from "lucide-react"
 import { toast } from "sonner"
 import type { EnrollmentStatus } from "@/api/enrollment.api"
 
@@ -50,7 +48,7 @@ export default function EnrollmentsPage() {
   if (enrollmentQuery.isLoading) return <div className="p-6">Loading...</div>
 
   return (
-    <div className="p-6">
+    <div className="px-4 lg:px-6">
       <EnrollmentsTable
         enrollments={enrollments}
         onDrop={handleDrop}

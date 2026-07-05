@@ -21,7 +21,7 @@ export default function CoursesPage() {
     }
 
     return (
-        <div className="p-6">
+        <div className="px-4 lg:px-6">
             <CoursesTable
                 courses={data || []}
                 onDelete={handleDeleteCourse}

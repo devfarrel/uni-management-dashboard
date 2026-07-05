@@ -1,5 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontalIcon, UserIcon } from "lucide-react"
+import { ArrowUpDown, MoreHorizontalIcon, Pencil, Trash2, UserIcon } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
@@ -163,8 +163,11 @@ export const getUserColumns = ({ onDelete, deleting }: ActionsProps): ColumnDef<
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <Separator className="my-1" />
                             <DropdownMenuGroup>
-                                <DropdownMenuItem asChild>
-                                    <Link to={`/users/${user.id}`}>View Profile</Link>
+                                <DropdownMenuItem>
+                                    <Link to={`/users/${user.id}`} className="flex items-center gap-2">
+                                        <Pencil className="h-4 w-4" />
+                                        View Profile
+                                    </Link>
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>
                             <DropdownMenuGroup>
@@ -173,6 +176,7 @@ export const getUserColumns = ({ onDelete, deleting }: ActionsProps): ColumnDef<
                                     disabled={deleting}
                                     onSelect={() => onDelete(user.id)}
                                 >
+                                    <Trash2 className="h-4 w-4" />
                                     Delete
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>

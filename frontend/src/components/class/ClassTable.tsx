@@ -14,7 +14,14 @@ type Props = {
   createPath?: string
 }
 
-export function ClassesTable({ classes, onDelete, deleting, title, showCreate, createPath }: Props) {
+export function ClassesTable({
+    classes,
+    onDelete,
+    deleting,
+    title = "Classes",
+    showCreate = true,
+    createPath = "/classes/new",
+}: Props) {
   const columns = getClassColumns({ onDelete, deleting })
   const navigate = useNavigate()
 
@@ -33,7 +40,7 @@ export function ClassesTable({ classes, onDelete, deleting, title, showCreate, c
         columns={columns}
         data={classes}
         searchKey="room"
-        searchPlaceholder="Search classes by name..."
+        searchPlaceholder="Search classes by room..."
       />
     </div>
   )

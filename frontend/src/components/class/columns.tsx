@@ -3,7 +3,6 @@ import { ArrowUpDown, MoreHorizontalIcon } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 
 import {
@@ -147,7 +146,7 @@ export const getClassColumns = ({ onDelete, deleting }: ActionsProps): ColumnDef
         id: "actions",
         header: () => <div className="text-center">Actions</div>,
         cell: ({ row }) => {
-            const user = row.original
+            const cls = row.original
             return (
                 <div className="text-center">
                     <DropdownMenu>
@@ -161,14 +160,14 @@ export const getClassColumns = ({ onDelete, deleting }: ActionsProps): ColumnDef
                             <Separator className="my-1" />
                             <DropdownMenuGroup>
                                 <DropdownMenuItem asChild>
-                                    <Link to={`/users/${user.id}`}>View Profile</Link>
+                                    <Link to={`/users/${cls.lecturer?.id}`}>View Lecturer Profile</Link>
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>
                             <DropdownMenuGroup>
                                 <DropdownMenuItem
                                     variant="destructive"
                                     disabled={deleting}
-                                    onSelect={() => onDelete(user.id)}
+                                    onSelect={() => onDelete(cls.id)}
                                 >
                                     Delete
                                 </DropdownMenuItem>

@@ -23,7 +23,7 @@ export default function UsersPage() {
     }
 
     return (
-        <div className="p-6">
+        <div className="px-4 lg:px-6">
             <UsersTable
                 users={students}
                 onDelete={handleDeleteUser}
