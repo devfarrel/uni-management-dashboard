@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import { NavMain } from "./nav-main";
-import { Users, LayoutDashboard, GraduationCap, BookOpen, School, Building2, BookText } from "lucide-react";
+import { Users, LayoutDashboard, GraduationCap, BookOpen, School, Building2, BookText, Building } from "lucide-react";
 import { NavUserContainer } from "./nav-user-container";
 
 const data = {
@@ -29,6 +29,7 @@ const data = {
       items: [
         { title: "User",       to: "/users",       icon: Users },
         { title: "Department", to: "/departments", icon: Building2 },
+        { title: "Enrollment", to: "/enrollments", icon: Building },
         { title: "Class",      to: "/classes",     icon: School },
         { title: "Course",     to: "/courses",     icon: BookText },
       ],

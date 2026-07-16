@@ -7,6 +7,7 @@ import departmentRoutes from "@routes/department.routes.js";
 import courseRoutes from "@routes/course.routes.js";
 import classRoutes from "@routes/class.routes.js";
 import enrollmentRoutes from "@routes/enrollment.routes.js";
+import dashboardRoutes from "@routes/dashboard.routes.js";
 
 const app = express();
 
@@ -25,5 +26,6 @@ app.use("/api/departments", departmentRoutes);
 app.use("/api/classes", classRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/enrollments", enrollmentRoutes);
+app.use("/api/dashboard", dashboardRoutes)
 
 export default app;
