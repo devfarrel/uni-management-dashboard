@@ -50,6 +50,19 @@ export const EnrollmentController = {
         }
     },
 
+    async assignGrade(req: AuthRequest, res: Response) {
+        try {
+            const { grade } = req.body
+            const enrollment = await EnrollmentService.assignGrade(
+                Number(req.params.id),
+                grade
+            )
+            res.json(enrollment)
+        } catch (error: any) {
+            res.status(400).json({ message: error.message })
+        }
+    },
+
     async drop(req: AuthRequest, res: Response) {
         try {
             const studentId = req.user!.role === "STUDENT" ? req.user!.id : undefined

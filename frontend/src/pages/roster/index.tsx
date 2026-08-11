@@ -5,15 +5,15 @@ import { useAuth } from "@/hooks/useAuth"
 
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
-import { ClassRosterTable } from "@/components/class/ClassRosterTable"
 import { toast } from "sonner"
+import { RosterTable } from "@/components/roster/RosterTable"
 
 export default function ClassRosterPage() {
     const { id }                                    = useParams()
     const navigate                                  = useNavigate()
     const { user: authUser }                        = useAuth()
     const { classQuery }                            = useClasses(Number(id))
-    const { classEnrollmentsQuery, drop, dropping } = useEnrollments(Number(id))
+    const { classEnrollmentsQuery, drop, dropping, assignGrade, grading, updateStatus, updatingStatus } = useEnrollments(Number(id))
 
     const cls         = classQuery.data
     const enrollments = classEnrollmentsQuery.data ?? []
@@ -41,7 +41,7 @@ export default function ClassRosterPage() {
     if (!cls) return <div className="p-6">Class not found</div>
 
     return (
-        <div className="p-6 space-y-6">
+        <div className="px-6 space-y-6">
 
             {/* Header */}
             <Button variant="ghost" onClick={() => navigate("/classes")} className="gap-2">
@@ -64,11 +64,33 @@ export default function ClassRosterPage() {
             </div>
 
             {/* Table */}
-            <ClassRosterTable
+            <RosterTable
                 enrollments={enrollments}
                 isAdmin={isAdmin}
                 onDrop={handleDrop}
                 dropping={dropping}
+                onGrade={async (id, grade) => {
+                    await toast.promise(
+                    assignGrade({ id, grade }),
+                    {
+                        loading: "Assigning grade...",
+                        success: "Grade assigned!",
+                        error:   (err) => err.response?.data?.message ?? "Failed",
+                    }
+                    )
+                }}
+                grading={grading}
+                onWaitlist={async (id) => {
+                    await toast.promise(
+                        updateStatus({ id, data: { status: "WAITLISTED" } }),
+                        {
+                            loading: "Moving to waitlist...",
+                            success: "Moved to waitlist!",
+                            error:   (err) => err.response?.data?.message ?? "Failed",
+                        }
+                    )
+                }}
+                waitlisting={updatingStatus}
             />
         </div>
     )

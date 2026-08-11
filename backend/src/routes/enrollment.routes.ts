@@ -11,6 +11,7 @@ router.get("/",           authorizeRoles("ADMIN"), EnrollmentController.getAll)
 router.get("/my",         authorizeRoles("STUDENT"), EnrollmentController.getMyEnrollments)
 router.get("/class/:classId", authorizeRoles("ADMIN", "LECTURER"), EnrollmentController.getByClass)
 router.post("/",          authorizeRoles("ADMIN", "STUDENT"), EnrollmentController.enroll)
+router.patch("/:id/grade",   authorizeRoles("ADMIN", "LECTURER"), EnrollmentController.assignGrade)
 router.delete("/:id",     authorizeRoles("ADMIN", "STUDENT"), EnrollmentController.drop)
 router.patch("/:id/status", authorizeRoles("ADMIN"), EnrollmentController.updateStatus)
 

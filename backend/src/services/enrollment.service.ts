@@ -4,10 +4,16 @@ import type { CreateEnrollmentInput, UpdateEnrollmentInput } from "@customTypes/
 const enrollmentInclude = {
   student: {
     select: {
-      id:         true,
-      name:       true,
-      email:      true,
-      identifier: true,
+      id:           true,
+      name:         true,
+      email:        true,
+      identifier:   true,
+      avatar:       true,
+      phone:        true,
+      address:      true,
+      department: {
+        select: { id: true, name: true, code: true }
+      }
     }
   },
   class: {
@@ -92,6 +98,17 @@ export const EnrollmentService = {
         data:    { studentId, classId, status },
         include: enrollmentInclude,
         })
+    },
+
+    assignGrade: async (id: number, grade: string) => {
+      const validGrades = ["A", "A-", "B+", "B", "B-", "C+", "C", "D", "E"]
+      if (!validGrades.includes(grade)) throw new Error("Invalid grade")
+
+      return prisma.enrollment.update({
+        where: { id },
+        data: { grade },
+        include: enrollmentInclude,
+      })
     },
     
     drop: async (id: number, studentId?: number) => {

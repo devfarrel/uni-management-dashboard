@@ -1,9 +1,8 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontalIcon } from "lucide-react"
+import { ArrowUpDown, MoreHorizontalIcon, Pen, Trash2 } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 
 import {
     DropdownMenu, 
@@ -11,6 +10,7 @@ import {
     DropdownMenuGroup, 
     DropdownMenuItem, 
     DropdownMenuLabel, 
+    DropdownMenuSeparator, 
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 
@@ -95,23 +95,26 @@ export const getDepartmentColumns = ({ onDelete, deleting }: ActionsProps ): Col
                                 <MoreHorizontalIcon />
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-40" align="end">
+                        <DropdownMenuContent className="w-44">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <Separator className="my-1" />
                             <DropdownMenuGroup>
                                 <DropdownMenuItem asChild>
                                     <Link
                                         to={`/department/${department.id}`}
                                         className="cursor-pointer"
                                     >
+                                        <Pen />
                                         Edit
                                     </Link>
                                 </DropdownMenuItem>
+                                <DropdownMenuSeparator />
                                 <DropdownMenuItem 
                                     onClick={() => onDelete(department.id)}
                                     disabled={deleting}
                                     className="cursor-pointer"
+                                    variant="destructive"
                                 >
+                                    <Trash2 />
                                     Delete
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>

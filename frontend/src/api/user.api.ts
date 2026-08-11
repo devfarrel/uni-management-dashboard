@@ -16,6 +16,13 @@ export const UserSchema = z.object({
   phone:      z.string().nullable(),
   birthDate:  z.string().nullable(),
   gender:     z.string().nullable(),
+  departmentId: z.number().nullable(),
+  department: z.object({
+    id: z.number(),
+    name: z.string(),
+    code: z.string(),
+    faculty: z.string(),
+  }).nullable(),
   createdAt:  z.string(),
   updatedAt:  z.string(),
 })

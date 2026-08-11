@@ -704,14 +704,6 @@ export type EnumCourseTypeFieldUpdateOperationsInput = {
   set?: $Enums.CourseType
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type CourseUpdateManyWithoutRequiredByNestedInput = {
   create?: Prisma.XOR<Prisma.CourseCreateWithoutRequiredByInput, Prisma.CourseUncheckedCreateWithoutRequiredByInput> | Prisma.CourseCreateWithoutRequiredByInput[] | Prisma.CourseUncheckedCreateWithoutRequiredByInput[]
   connectOrCreate?: Prisma.CourseCreateOrConnectWithoutRequiredByInput | Prisma.CourseCreateOrConnectWithoutRequiredByInput[]

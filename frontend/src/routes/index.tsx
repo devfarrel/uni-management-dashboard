@@ -18,7 +18,7 @@ import LecturersPage from "@/pages/lecturer/LecturersPage";
 import StudentsPage from "@/pages/lecturer/StudentsPage";
 import ClassesPage from "@/pages/class/index";
 import CreateClassPage from "@/pages/class/create";
-import ClassRosterPage from "@/pages/class/rosterIndex";
+import ClassRosterPage from "@/pages/roster";
 import EnrollmentsPage from "@/pages/enrollment/index";
 import CreateEnrollmentPage from "@/pages/enrollment/create";
 

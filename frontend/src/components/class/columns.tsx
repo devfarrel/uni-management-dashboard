@@ -40,10 +40,35 @@ export const getClassColumns = ({ onDelete, deleting }: ActionsProps): ColumnDef
             </Button>
         ),
         cell: ({ row }) => {
+            const cls = row.original
             return (
-                <span className="font-medium">
-                    {row.getValue("name")}
-                </span>
+                <HoverCard openDelay={100} closeDelay={100}>
+                    <HoverCardTrigger asChild>
+                    <Link
+                        to={`/classes/${cls.id}/roster`}
+                        className="text-sm font-medium cursor-pointer hover:underline"
+                        >
+                        {cls.name || "-"}
+                        </Link>
+                    </HoverCardTrigger>
+                    <HoverCardContent align="center" side="right" alignOffset={20} sideOffset={20}>
+                        <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                                <span className="text-sm font-medium">Code:</span>
+                                <span className="text-sm">{cls.name || "-"}</span>
+                            </div>
+                            <Separator />
+                            <div className="flex flex-col">
+                                <span className="text-xs font-medium">Room: {row.original.room}</span>
+                                <span className="text-xs font-medium">Day: {row.original.day}</span>
+                                <span className="text-xs font-medium">Time: {row.original.startTime.slice(0, 5)} - {row.original.endTime.slice(0, 5)}</span>
+                            </div>
+                            <span className="text-muted-foreground text-xs">
+                                Click code to view full class schedule
+                            </span>
+                        </div>
+                    </HoverCardContent>
+                </HoverCard>
             )
         }
     },

@@ -44,6 +44,7 @@ async function main() {
           phone:      faker.phone.number(),
           address:    faker.location.streetAddress(),
           gender:     faker.helpers.arrayElement(["Male", "Female"]),
+          departmentId: faker.helpers.arrayElement(departments).id,
           createdAt:  faker.date.between({
             from: new Date("2025-08-01"),
             to:   new Date("2025-12-31"),
@@ -68,7 +69,8 @@ async function main() {
           phone:      faker.phone.number(),
           address:    faker.location.streetAddress(),
           birthDate:  faker.date.birthdate({ min: 17, max: 24, mode: "age" }),
-          gender:     faker.helpers.arrayElement(["Male", "Female"]),
+          gender:       faker.helpers.arrayElement(["Male", "Female"]),
+          departmentId: faker.helpers.arrayElement(departments).id,
           createdAt:  faker.date.between({
             from: new Date("2025-08-01"),
             to:   new Date("2026-06-30"),

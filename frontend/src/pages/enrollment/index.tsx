@@ -1,12 +1,10 @@
 // pages/enrollment/index.tsx
-import { useNavigate } from "react-router-dom"
 import { useEnrollments } from "@/hooks/useEnrollments"
 import { EnrollmentsTable } from "@/components/enrollment/EnrollmentsTable"
 import { toast } from "sonner"
 import type { EnrollmentStatus } from "@/api/enrollment.api"
 
 export default function EnrollmentsPage() {
-  const navigate = useNavigate()
   const {
     enrollmentQuery,
     drop,         dropping,

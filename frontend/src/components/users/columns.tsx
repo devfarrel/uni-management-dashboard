@@ -1,5 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontalIcon, Pencil, Trash2, UserIcon } from "lucide-react"
+import { ArrowUpDown, MoreHorizontalIcon, Trash2, UserIcon, UserRoundSearch } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
@@ -12,6 +12,7 @@ import {
     DropdownMenuGroup, 
     DropdownMenuItem, 
     DropdownMenuLabel, 
+    DropdownMenuSeparator, 
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import {
@@ -72,7 +73,7 @@ export const getUserColumns = ({ onDelete, deleting }: ActionsProps): ColumnDef<
                     {user.name ?? user.username}
                     </Link>
                 </HoverCardTrigger>
-                <HoverCardContent side="bottom" align="start" className="w-64">
+                <HoverCardContent side="top" align="start" className="w-64">
                     <div className="flex items-center gap-3 mb-3">
                     {user.avatar ? (
                         <img
@@ -159,24 +160,24 @@ export const getUserColumns = ({ onDelete, deleting }: ActionsProps): ColumnDef<
                                 <MoreHorizontalIcon />
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-40" align="end">
+                        <DropdownMenuContent className="w-44">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <Separator className="my-1" />
                             <DropdownMenuGroup>
                                 <DropdownMenuItem>
                                     <Link to={`/users/${user.id}`} className="flex items-center gap-2">
-                                        <Pencil className="h-4 w-4" />
+                                        <UserRoundSearch />
                                         View Profile
                                     </Link>
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>
+                            <DropdownMenuSeparator />
                             <DropdownMenuGroup>
                                 <DropdownMenuItem
                                     variant="destructive"
                                     disabled={deleting}
                                     onSelect={() => onDelete(user.id)}
                                 >
-                                    <Trash2 className="h-4 w-4" />
+                                    <Trash2 />
                                     Delete
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>

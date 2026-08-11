@@ -37,6 +37,18 @@ export const useEnrollments = (classId?: number) => {
         },
     })
 
+    const gradeMutation = useMutation({
+        mutationFn: ({ id, grade }: { id: number; grade: string }) =>
+            EnrollmentAPI.assignGrade(id, grade),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["enrollments"] })
+            toast.success("Grade assigned!")
+        },
+        onError: (err: any) => {
+            toast.error(err.response?.data?.message ?? "Failed to assign grade")
+        },
+    })
+
     const dropMutation = useMutation({
         mutationFn: (id: number) => EnrollmentAPI.drop(id),
         onSuccess: () => {
@@ -70,5 +82,7 @@ export const useEnrollments = (classId?: number) => {
         dropping:       dropMutation.isPending,
         updateStatus:   updateStatusMutation.mutateAsync,
         updatingStatus: updateStatusMutation.isPending,
+        assignGrade:    gradeMutation.mutateAsync,
+        grading:        gradeMutation.isPending,
     }
 }

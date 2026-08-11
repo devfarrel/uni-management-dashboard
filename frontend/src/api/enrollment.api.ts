@@ -9,12 +9,20 @@ export const EnrollmentSchema = z.object({
     studentId: z.number(),
     classId:   z.number(),
     grade:     z.string().nullable(),
-    status:    EnrollmentStatusSchema,
+    status:    EnrollmentStatusSchema,  
     student: z.object({
         id:         z.number(),
         name:       z.string().nullable(),
         email:      z.string(),
         identifier: z.string(),
+        avatar:     z.string().nullable(),
+        phone:      z.string().nullable(),
+        address:    z.string().nullable(),
+        department: z.object({
+            id:   z.number(),
+            name: z.string(),
+            code: z.string(),
+        }).nullable(),
     }).optional(),
     class: z.object({
         id:          z.number(),
@@ -83,6 +91,11 @@ export const EnrollmentAPI = {
     updateStatus: async (id: number, data: UpdateEnrollmentInput): Promise<Enrollment> => {
         const validated = UpdateEnrollmentSchema.parse(data)
         const res = await api.patch(`/enrollments/${id}/status`, validated)
+        return EnrollmentSchema.parse(res.data)
+    },
+
+    assignGrade: async (id: number, grade: string): Promise<Enrollment> => {
+        const res = await api.patch(`/enrollments/${id}/grade`, { grade })
         return EnrollmentSchema.parse(res.data)
     },
 }

@@ -68,13 +68,14 @@ export const getEnrollmentColumns = ({ onDrop, dropping, onStatusChange, updatin
                         {student?.name ?? "-"}
                     </Link>
                     </HoverCardTrigger>
-                    <HoverCardContent side="bottom" align="start" className="w-64">
+                    <HoverCardContent side="top" align="start" className="w-64">
                     <div className="flex items-center gap-3 mb-3">
                         <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
                         <UserIcon className="w-5 h-5" />
                         </div>
                         <div>
                         <p className="text-sm font-medium">{student?.name ?? "-"}</p>
+                        <p className="text-xs text-muted-foreground">{student?.department?.name}</p>
                         <p className="text-xs text-muted-foreground font-mono">{student?.identifier}</p>
                         </div>
                     </div>
@@ -153,9 +154,10 @@ export const getEnrollmentColumns = ({ onDrop, dropping, onStatusChange, updatin
             </Button>
         ),
         cell: ({ row }) => {
+            const status = row.original.status
             return (
-                <Badge variant={statusVariant[row.original.status]}>
-                    {row.original.status}
+                <Badge variant={statusVariant[status ?? ""] ?? "outline"}>
+                    {status ?? "—"}
                 </Badge>
             )
         }

@@ -19,6 +19,8 @@ export const userSelect = {
     phone:      true,
     birthDate:  true,
     gender:     true,
+    departmentId: true,
+    department: true,
     createdAt:  true,
     updatedAt:  true,
 }

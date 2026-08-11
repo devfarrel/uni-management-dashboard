@@ -43,6 +43,9 @@ model User {
   birthDate DateTime?
   gender    String?
 
+  departmentId Int?
+  department   Department? @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+
   courses     Course[]     @relation("LecturerCourses")
   classes     Class[]      @relation("LecturerClasses")
   enrollments Enrollment[] @relation("StudentEnrollments")
@@ -54,7 +57,8 @@ model Department {
   code    String @unique
   faculty String
 
-  courses Course[]
+  users       User[]
+  courses     Course[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -74,7 +78,7 @@ model Course {
   department   Department @relation(fields: [departmentId], references: [id])
 
   lecturerId Int?
-  lecturer   User? @relation("LecturerCourses", fields: [lecturerId], references: [id])
+  lecturer   User? @relation("LecturerCourses", fields: [lecturerId], references: [id], onDelete: Cascade)
 
   prerequisites Course[] @relation("CoursePrerequisites")
   requiredBy    Course[] @relation("CoursePrerequisites")
@@ -98,10 +102,10 @@ model Class {
   maxStudents  Int
 
   courseId Int
-  course   Course @relation("CourseClasses", fields: [courseId], references: [id])
+  course   Course @relation("CourseClasses", fields: [courseId], references: [id], onDelete: Cascade)
 
   lecturerId Int?
-  lecturer   User? @relation("LecturerClasses", fields: [lecturerId], references: [id])
+  lecturer   User? @relation("LecturerClasses", fields: [lecturerId], references: [id], onDelete: Cascade)
 
   isOpen      Boolean   @default(true)
   enrollStart DateTime?
@@ -116,9 +120,9 @@ model Class {
 model Enrollment {
   id        Int              @id @default(autoincrement())
   studentId Int
-  student   User             @relation("StudentEnrollments", fields: [studentId], references: [id])
+  student   User             @relation("StudentEnrollments", fields: [studentId], references: [id], onDelete: Cascade)
   classId   Int
-  class     Class            @relation(fields: [classId], references: [id])
+  class     Class            @relation(fields: [classId], references: [id], onDelete: Cascade)
   grade     String?
   status    EnrollmentStatus @default(ENROLLED)
 

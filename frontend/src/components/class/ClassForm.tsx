@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 import { ClassFormSchema, type ClassFormValues } from "@/schemas/class.form.schema"
 import type { ClassInput } from "@/api/class.api"
-import { useClasses } from "@/hooks/useClasses"
 import { useCourses } from "@/hooks/useCourses"
 import { useUsers } from "@/hooks/useUsers"
 
