@@ -1,33 +1,40 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { DepartmentAPI } from "@/api/department.api"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { DepartmentAPI } from "@/api/department.api";
 
-export const useDepartments = () => {
-    const queryClient = useQueryClient();
+export const useDepartments = (id?: number) => {
+  const queryClient = useQueryClient();
 
-    const departmentsQuery = useQuery({
-        queryKey: ["departments"],
-        queryFn: DepartmentAPI.getAll,
-    });
+  const departmentsQuery = useQuery({
+    queryKey: ["departments"],
+    queryFn: DepartmentAPI.getAll,
+  });
 
-    const createMutation = useMutation({
-        mutationFn: DepartmentAPI.create,
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["departments"] })
-        },
-    });
+  const departmentQuery = useQuery({
+    queryKey: ["departments", id],
+    queryFn: () => DepartmentAPI.getById(id!),
+    enabled: !!id,
+  });
 
-    const deleteMutation = useMutation({
-        mutationFn: DepartmentAPI.delete,
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["departments"] })
-        },
-    });
+  const createMutation = useMutation({
+    mutationFn: DepartmentAPI.create,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["departments"] });
+    },
+  });
 
-    return {
-        departmentsQuery,
-        createDepartment: createMutation.mutateAsync,
-        creating: createMutation.isPending,
-        deleteDepartment: deleteMutation.mutateAsync,
-        deleting: deleteMutation.isPending,
-    };
-}
+  const deleteMutation = useMutation({
+    mutationFn: DepartmentAPI.delete,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["departments"] });
+    },
+  });
+
+  return {
+    departmentQuery,
+    departmentsQuery,
+    createDepartment: createMutation.mutateAsync,
+    creating: createMutation.isPending,
+    deleteDepartment: deleteMutation.mutateAsync,
+    deleting: deleteMutation.isPending,
+  };
+};

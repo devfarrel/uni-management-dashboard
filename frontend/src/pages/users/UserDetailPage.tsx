@@ -1,4 +1,3 @@
-// pages/users/UserDetailPage.tsx
 import { useParams, useNavigate } from "react-router-dom"
 import { useUsers } from "@/hooks/useUsers"
 import { useAuth } from "@/hooks/useAuth"

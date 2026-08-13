@@ -22,6 +22,7 @@ import ClassRosterPage from "@/pages/roster";
 import EnrollmentsPage from "@/pages/enrollment/index";
 import CreateEnrollmentPage from "@/pages/enrollment/create";
 import MyClassesPage from "@/pages/my-classes";
+import DepartmentDetailPage from "@/pages/department/detail";
 
 export const router = createBrowserRouter([
   {
@@ -30,86 +31,61 @@ export const router = createBrowserRouter([
       {
         element: <RequireAuth />,
         children: [
+          // Admin only
           {
-            path: "/",
-            element: <DashboardPage />,
+            element: <RequireAuth allowedRoles={["ADMIN"]} />,
+            children: [
+              { path: "/users", element: <UsersPage /> },
+              { path: "/users/new", element: <AddUserPage /> },
+              { path: "/departments", element: <DepartmentsPage /> },
+              { path: "/departments/new", element: <CreateDepartmentPage /> },
+              { path: "/enrollments", element: <EnrollmentsPage /> },
+              { path: "/enrollments/new", element: <CreateEnrollmentPage /> },
+            ],
           },
+
+          // Admin & Lecturer only
           {
-            path: "/users",
-            element: <UsersPage />,
+            element: <RequireAuth allowedRoles={["ADMIN", "LECTURER"]} />,
+            children: [
+              { path: "/classes", element: <ClassesPage /> },
+              { path: "/classes/new", element: <CreateClassPage /> },
+              { path: "/classes/:id/roster", element: <ClassRosterPage /> },
+              { path: "/courses", element: <CoursesPage /> },
+              { path: "/courses/new", element: <CreateCoursePage /> },
+              { path: "/students", element: <StudentsPage /> },
+              { path: "/departments/:id", element: <DepartmentDetailPage /> },
+            ],
           },
+
+          // Student only
           {
-            path: "/lecturers",
-            element: <LecturersPage />,
+            element: <RequireAuth allowedRoles={["STUDENT"]} />,
+            children: [{ path: "/my-classes", element: <MyClassesPage /> }],
           },
+
+          // Authenticated users
           {
-            path: "/students",
-            element: <StudentsPage />,
+            element: <RequireAuth />,
+            children: [
+              { path: "/", element: <DashboardPage /> },
+              { path: "/users/:id", element: <UserDetailPage /> },
+              { path: "/users/:id/security", element: <UserSecurityPage /> },
+              {
+                path: "/users/:id/security/email",
+                element: <UserSecurityEmailPage />,
+              },
+              {
+                path: "/users/:id/security/username",
+                element: <UserSecurityUsernamePage />,
+              },
+              {
+                path: "/users/:id/security/password",
+                element: <UserSecurityPasswordPage />,
+              },
+              { path: "/lecturers", element: <LecturersPage /> },
+            ],
           },
-          {
-            path: "/users/new",
-            element: <AddUserPage />,
-          },
-          {
-            path: "/users/:id",
-            element: <UserDetailPage />,
-          },
-          {
-            path: "/users/:id/security",
-            element: <UserSecurityPage />,
-          },
-          {
-            path: "/users/:id/security/username",
-            element: <UserSecurityUsernamePage />,
-          },
-          {
-            path: "/users/:id/security/email",
-            element: <UserSecurityEmailPage />,
-          },
-          {
-            path: "/users/:id/security/password",
-            element: <UserSecurityPasswordPage />,
-          },
-          {
-            path: "/departments",
-            element: <DepartmentsPage />,
-          },
-          {
-            path: "/departments/new",
-            element: <CreateDepartmentPage />,
-          },
-          {
-            path: "/courses",
-            element: <CoursesPage />,
-          },
-          {
-            path: "/courses/new",
-            element: <CreateCoursePage />,
-          },
-          {
-            path: "/classes",
-            element: <ClassesPage />,
-          },
-          {
-            path: "/classes/new",
-            element: <CreateClassPage />,
-          },
-          {
-            path: "/classes/:id/roster",
-            element: <ClassRosterPage />,
-          },
-          {
-            path: "/enrollments",
-            element: <EnrollmentsPage />,
-          },
-          {
-            path: "/enrollments/new",
-            element: <CreateEnrollmentPage />,
-          },
-          {
-            path: "/my-classes",
-            element: <MyClassesPage />,
-          }
         ],
       },
     ],

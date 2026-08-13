@@ -1,4 +1,4 @@
-import { NavUser} from "@/components/layout/sidebar/nav-user";
+import { NavUserSidebar } from "@/components/layout/sidebar/nav-user-sidebar";
 import { useAuth } from "@/hooks/useAuth";
 
 export function NavUserContainer() {
@@ -10,7 +10,7 @@ export function NavUserContainer() {
     console.log("auth user:", user);
 
     return (
-        <NavUser
+        <NavUserSidebar
         user={{
             name: user.name,
             email: user.email,

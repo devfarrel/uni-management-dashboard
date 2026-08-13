@@ -85,7 +85,7 @@ export const getCourseColumns = ({ onDelete, deleting }: ActionsProps): ColumnDe
         }
     },
     {
-        accessorKey: "departmentId",
+        accessorKey: "department",
         header: ({ column }) => (
             <Button
                 variant="ghost"
@@ -99,7 +99,7 @@ export const getCourseColumns = ({ onDelete, deleting }: ActionsProps): ColumnDe
         cell: ({ row }) => {
             return (
                 <span className="font-medium">
-                    {row.getValue("departmentId")}
+                    {row.getValue("department")?.name}
                 </span>
             )
         },

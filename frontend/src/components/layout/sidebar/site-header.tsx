@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/breadcrumb";
 
 import { navMain } from "@/lib/nav";
-import { NavUserContainer } from "./nav-user-container";
+import { NavUserNavbarContainer } from "@/components/layout/nav-user-navbar-container";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { useLocation, Link } from "react-router-dom";
@@ -76,7 +76,7 @@ export function SiteHeader() {
         </Breadcrumb>
 
         <div className="ml-auto flex items-center gap-2">
-          <NavUserContainer />
+          <NavUserNavbarContainer />
         </div>
       </div>
     </header>
