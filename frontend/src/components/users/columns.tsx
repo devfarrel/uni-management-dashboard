@@ -160,7 +160,7 @@ export const getUserColumns = ({ onDelete, deleting }: ActionsProps): ColumnDef<
                                 <MoreHorizontalIcon />
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-44">
+                        <DropdownMenuContent className="w-44" align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuGroup>
                                 <DropdownMenuItem>
@@ -178,7 +178,7 @@ export const getUserColumns = ({ onDelete, deleting }: ActionsProps): ColumnDef<
                                     onSelect={() => onDelete(user.id)}
                                 >
                                     <Trash2 />
-                                    Delete
+                                    Delete User
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>
                         </DropdownMenuContent>

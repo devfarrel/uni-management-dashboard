@@ -1,5 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontalIcon, UserIcon } from "lucide-react"
+import { ArrowUpDown, ClipboardCheck, ClipboardClock, ClipboardX, MoreHorizontalIcon, UserIcon, UserRoundMinus, UserRoundSearch } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
@@ -11,7 +11,8 @@ import {
     DropdownMenuContent, 
     DropdownMenuGroup, 
     DropdownMenuItem, 
-    DropdownMenuLabel, 
+    DropdownMenuLabel,
+    DropdownMenuSeparator, 
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import {
@@ -222,41 +223,47 @@ export const getEnrollmentColumns = ({ onDrop, dropping, onStatusChange, updatin
                                 <MoreHorizontalIcon />
                             </Button>
                         </DropdownMenuTrigger>
-                        <Separator className="my-1" />
-                            <DropdownMenuContent className="w-40" align="end">
-                                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuContent className="w-44" align="end">
+                                <DropdownMenuLabel>Enrollment</DropdownMenuLabel>
                                 <DropdownMenuGroup>
                                 <DropdownMenuItem
-                                disabled={updatingStatus}
-                                onSelect={() => onStatusChange(enrollment.id, "ENROLLED")}
+                                    disabled={updatingStatus}
+                                    onSelect={() => onStatusChange(enrollment.id, "ENROLLED")}
                                 >
+                                <ClipboardCheck />
                                 Set Enrolled
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
-                                disabled={updatingStatus}
-                                onSelect={() => onStatusChange(enrollment.id, "WAITLISTED")}
+                                    disabled={updatingStatus}
+                                    onSelect={() => onStatusChange(enrollment.id, "WAITLISTED")}
                                 >
+                                <ClipboardClock />
                                 Set Waitlisted
                                 </DropdownMenuItem>
+                                <DropdownMenuSeparator />
                                 <DropdownMenuItem
-                                disabled={updatingStatus}
-                                onSelect={() => onStatusChange(enrollment.id, "DROPPED")}
+                                    disabled={updatingStatus}
+                                    onSelect={() => onStatusChange(enrollment.id, "DROPPED")}
+                                    variant="destructive"
                                 >
+                                <ClipboardX />
                                 Set Dropped
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>
-                            <Separator className="my-1" />
+                            <DropdownMenuSeparator />
+                            <DropdownMenuLabel>Action</DropdownMenuLabel>
                             <DropdownMenuGroup>
-                                <DropdownMenuItem asChild>
-                                    <Link to={`/users/${enrollment.student?.id}`}>View Student Profile</Link>
+                                <DropdownMenuItem>
+                                    <UserRoundSearch />
+                                    <Link to={`/users/${enrollment.student?.id}`} className="text-xs">View Student Profile</Link>
                                 </DropdownMenuItem>
-                            </DropdownMenuGroup>
-                            <DropdownMenuGroup>
+                                <DropdownMenuSeparator />
                                 <DropdownMenuItem
                                     variant="destructive"
                                     disabled={dropping}
                                     onSelect={() => onDrop(enrollment.id)}
                                 >
+                                    <UserRoundMinus />
                                     Remove
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>

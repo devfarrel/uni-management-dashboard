@@ -1,16 +1,16 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontalIcon, Pencil, Trash2 } from "lucide-react"
+import { ArrowUpDown, MoreHorizontalIcon, Pen, Trash2 } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 
 import {
     DropdownMenu, 
     DropdownMenuContent, 
     DropdownMenuGroup, 
     DropdownMenuItem, 
-    DropdownMenuLabel, 
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 
@@ -119,23 +119,23 @@ export const getCourseColumns = ({ onDelete, deleting }: ActionsProps): ColumnDe
                                 <MoreHorizontalIcon />
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-40" align="end">
+                        <DropdownMenuContent className="w-44" align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <Separator className="my-1" />
                             <DropdownMenuGroup>
                                 <DropdownMenuItem>
-                                    <Pencil className="h-4 w-4" />
+                                    <Pen />
                                     <Link to={`/courses/${course.id}`}>
-                                        Edit
+                                        Edit Course
                                     </Link>
                                 </DropdownMenuItem>
+                                <DropdownMenuSeparator />
                                 <DropdownMenuItem
                                     onClick={() => onDelete(course.id)}
                                     disabled={deleting}
-                                    className="text-red-500 hover:text-red-700 dark:text-red-300 dark:hover:text-red-500"
+                                    variant="destructive"
                                 >
-                                    <Trash2 className="h-4 w-4" />
-                                    Delete
+                                    <Trash2 />
+                                    Delete Course
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>
                         </DropdownMenuContent>

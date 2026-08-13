@@ -1,5 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontalIcon } from "lucide-react"
+import { ArrowUpDown, ClipboardList, MoreHorizontalIcon, Trash2, UserRoundSearch } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
@@ -10,7 +10,8 @@ import {
     DropdownMenuContent, 
     DropdownMenuGroup, 
     DropdownMenuItem, 
-    DropdownMenuLabel, 
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import {
@@ -180,20 +181,24 @@ export const getClassColumns = ({ onDelete, deleting }: ActionsProps): ColumnDef
                                 <MoreHorizontalIcon />
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-40" align="end">
+                        <DropdownMenuContent className="w-44" align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <Separator className="my-1" />
                             <DropdownMenuGroup>
-                                <DropdownMenuItem asChild>
-                                    <Link to={`/users/${cls.lecturer?.id}`}>View Lecturer Profile</Link>
+                                <DropdownMenuItem>
+                                    <UserRoundSearch />
+                                    <Link to={`/users/${cls.lecturer?.id}`}>Lecturer Profile</Link>
                                 </DropdownMenuItem>
-                            </DropdownMenuGroup>
-                            <DropdownMenuGroup>
+                                <DropdownMenuItem>
+                                    <ClipboardList />
+                                    <Link to={`/classes/${cls.id}/roster`}>View Roster</Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuSeparator />
                                 <DropdownMenuItem
                                     variant="destructive"
                                     disabled={deleting}
                                     onSelect={() => onDelete(cls.id)}
                                 >
+                                    <Trash2 />
                                     Delete
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>

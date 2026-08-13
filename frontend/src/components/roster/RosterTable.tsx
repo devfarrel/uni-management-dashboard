@@ -50,7 +50,7 @@ export function RosterTable({
       <DataTable
         columns={columns}
         data={enrollments}
-        searchKey="name"
+        searchKey="student"
         searchPlaceholder="Search students..."
       />
     </div>

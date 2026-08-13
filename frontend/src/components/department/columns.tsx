@@ -95,7 +95,7 @@ export const getDepartmentColumns = ({ onDelete, deleting }: ActionsProps ): Col
                                 <MoreHorizontalIcon />
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-44">
+                        <DropdownMenuContent className="w-44" align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuGroup>
                                 <DropdownMenuItem asChild>
@@ -104,7 +104,7 @@ export const getDepartmentColumns = ({ onDelete, deleting }: ActionsProps ): Col
                                         className="cursor-pointer"
                                     >
                                         <Pen />
-                                        Edit
+                                        Edit Department
                                     </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
@@ -115,7 +115,7 @@ export const getDepartmentColumns = ({ onDelete, deleting }: ActionsProps ): Col
                                     variant="destructive"
                                 >
                                     <Trash2 />
-                                    Delete
+                                    Delete Department
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>
                         </DropdownMenuContent>

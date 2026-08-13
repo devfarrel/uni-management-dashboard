@@ -37,6 +37,10 @@ type ActionsProps = {
 export const getRosterColumns = ({ onDrop, dropping, onGrade, grading, onWaitlist, waitlisting }: ActionsProps): ColumnDef<Enrollment>[] => [
     {
         accessorKey: "student",
+        filterFn: (row, _columnId, filterValue: string) => {
+            const name = row.original.student?.name ?? ""
+            return name.toLowerCase().includes(filterValue.toLowerCase())
+        },
         header: ({ column }) => (
             <Button
                 variant="ghost"
@@ -137,7 +141,7 @@ export const getRosterColumns = ({ onDrop, dropping, onGrade, grading, onWaitlis
                             <MoreHorizontalIcon className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-44">
+                    <DropdownMenuContent className="w-44" align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem asChild>
                             <Link to={`/users/${enrollment.studentId}`}>
@@ -181,7 +185,7 @@ export const getRosterColumns = ({ onDrop, dropping, onGrade, grading, onWaitlis
                             variant="destructive"
                         >
                             <UserRoundX />
-                            Drop
+                            Drop Student
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

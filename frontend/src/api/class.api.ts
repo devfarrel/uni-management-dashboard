@@ -13,6 +13,8 @@ export const ClassSchema = z.object({
     endTime:      z.string(),
     academicYear: z.string(),
     semester:     z.number(),
+    isOpen:       z.boolean(),
+    isActive:     z.boolean(),
     courseId:     z.number(),
     course:       CourseSchema.pick({ id: true, code: true, title: true }).optional(),
     lecturerId:   z.number().nullable(),
