@@ -1,0 +1,10 @@
+# Root-level node_modules (monorepo root install)
+node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS/editor junk
+.DS_Store
